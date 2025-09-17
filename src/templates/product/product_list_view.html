@@ -1,0 +1,271 @@
+{% extends "home.html" %}
+
+{% block page_content %}
+
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+<!-- Sidebar for desktop, collapsible filter for mobile -->
+<!-- Sidebar for desktop -->
+<aside class="hidden md:flex flex-col w-64 bg-gray-50 border-r p-4">
+    <h2 class="text-lg font-semibold mb-4">Filtreler</h2>
+    <form method="get" class="space-y-4">
+        <!-- Kategori Filtresi -->
+        <div>
+            <h3 class="text-md font-medium mb-2">Kategoriler</h3>
+            <div class="space-y-2 max-h-40 overflow-y-auto">
+                {% for category in categories %}
+                    <label class="flex items-center space-x-2">
+                        <input type="checkbox" name="category" value="{{ category.id }}"
+                               {% if category.id in selected_category_ids %}checked{% endif %}
+                               class="rounded text-blue-600 focus:ring-blue-500">
+                        <span class="text-sm">{{ category.name }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Ada Göre Filtreleme -->
+        <div>
+            <h3 class="text-md font-medium mb-2">Ürün Adı</h3>
+            <input type="text" name="name" value="{{ request.GET.name }}" 
+                   placeholder="Ürün adı ara..." 
+                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Fiyat Aralığı Filtresi -->
+        <div>
+            <h3 class="text-md font-medium mb-2">Fiyat Aralığı</h3>
+            <div class="space-y-2">
+                <div class="flex space-x-2">
+                    <input type="number" name="min_price" value="{{ request.GET.min_price }}" 
+                           placeholder="Min" step="0.01"
+                           class="w-1/2 px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                    <input type="number" name="max_price" value="{{ request.GET.max_price }}" 
+                           placeholder="Max" step="0.01"
+                           class="w-1/2 px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                </div>
+                <select name="currency" class="w-full px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                    <option value="">Para Birimi</option>
+                    <option value="TRY" {% if request.GET.currency == 'TRY' %}selected{% endif %}>TRY (₺)</option>
+                    <option value="USD" {% if request.GET.currency == 'USD' %}selected{% endif %}>USD ($)</option>
+                    <option value="EUR" {% if request.GET.currency == 'EUR' %}selected{% endif %}>EUR (€)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Filtre Butonları -->
+        <div class="space-y-2 pt-2">
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                Filtrele
+            </button>
+            <a href="{% url 'product:product_list' %}"
+               class="block w-full text-center bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600">
+                Temizle
+            </a>
+        </div>
+    </form>
+</aside>
+
+<!-- Main Content -->
+<div class="flex-1 p-4">
+    <!-- Mobile filter button and drawer -->
+    <div class="md:hidden mb-4">
+        <button id="filterToggle" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+            Filtrele
+        </button>
+        <div id="mobileFilter" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden">
+            <div class="bg-white w-11/12 max-w-sm mx-auto mt-10 p-6 rounded-lg shadow-lg relative max-h-[90vh] overflow-y-auto">
+                <button id="closeFilter" class="absolute top-2 right-2 text-gray-500 text-xl">&times;</button>
+                <h2 class="text-lg font-semibold mb-4">Filtreler</h2>
+                <form method="get" class="space-y-4">
+                    <!-- Kategori Filtresi -->
+                    <div>
+                        <h3 class="text-md font-medium mb-2">Kategoriler</h3>
+                        <div class="space-y-2 max-h-32 overflow-y-auto">
+                            {% for category in categories %}
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="category" value="{{ category.id }}"
+                                           {% if category.id in selected_category_ids %}checked{% endif %}
+                                           class="rounded text-blue-600 focus:ring-blue-500">
+                                    <span class="text-sm">{{ category.name }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Ada Göre Filtreleme -->
+                    <div>
+                        <h3 class="text-md font-medium mb-2">Ürün Adı</h3>
+                        <input type="text" name="name" value="{{ request.GET.name }}" 
+                               placeholder="Ürün adı ara..." 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Fiyat Aralığı Filtresi -->
+                    <div>
+                        <h3 class="text-md font-medium mb-2">Fiyat Aralığı</h3>
+                        <div class="space-y-2">
+                            <div class="flex space-x-2">
+                                <input type="number" name="min_price" value="{{ request.GET.min_price }}" 
+                                       placeholder="Min" step="0.01"
+                                       class="w-1/2 px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                <input type="number" name="max_price" value="{{ request.GET.max_price }}" 
+                                       placeholder="Max" step="0.01"
+                                       class="w-1/2 px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            </div>
+                            <select name="currency" class="w-full px-2 py-1 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 text-sm">
+                                <option value="">Para Birimi</option>
+                                <option value="TRY" {% if request.GET.currency == 'TRY' %}selected{% endif %}>TRY (₺)</option>
+                                <option value="USD" {% if request.GET.currency == 'USD' %}selected{% endif %}>USD ($)</option>
+                                <option value="EUR" {% if request.GET.currency == 'EUR' %}selected{% endif %}>EUR (€)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filtre Butonları -->
+                    <div class="space-y-2 pt-2">
+                        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">
+                            Filtrele
+                        </button>
+                        <a href="{% url 'product:product_list' %}"
+                           class="block w-full text-center bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600">
+                            Temizle
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            const filterToggle = document.getElementById('filterToggle');
+            const mobileFilter = document.getElementById('mobileFilter');
+            const closeFilter = document.getElementById('closeFilter');
+            filterToggle.onclick = () => mobileFilter.classList.remove('hidden');
+            closeFilter.onclick = () => mobileFilter.classList.add('hidden');
+            mobileFilter.onclick = (e) => {
+                if (e.target === mobileFilter) mobileFilter.classList.add('hidden');
+            };
+        </script>
+    </div>
+
+    <!-- Active Filters Display -->
+    {% if request.GET.name or request.GET.min_price or request.GET.max_price or request.GET.currency or selected_category_ids %}
+    <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <h4 class="text-sm font-medium text-blue-800 mb-2">Aktif Filtreler:</h4>
+        <div class="flex flex-wrap gap-2">
+            {% if request.GET.name %}
+                <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    Ad: "{{ request.GET.name }}"
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'name' %}{{ key }}={{ value }}&{% endif %}{% endfor %}" class="ml-1 text-blue-600 hover:text-blue-800">&times;</a>
+                </span>
+            {% endif %}
+            {% if request.GET.min_price %}
+                <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    Min: {{ request.GET.min_price }}
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'min_price' %}{{ key }}={{ value }}&{% endif %}{% endfor %}" class="ml-1 text-blue-600 hover:text-blue-800">&times;</a>
+                </span>
+            {% endif %}
+            {% if request.GET.max_price %}
+                <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    Max: {{ request.GET.max_price }}
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'max_price' %}{{ key }}={{ value }}&{% endif %}{% endfor %}" class="ml-1 text-blue-600 hover:text-blue-800">&times;</a>
+                </span>
+            {% endif %}
+            {% if request.GET.currency %}
+                <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                    Para Birimi: {{ request.GET.currency }}
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'currency' %}{{ key }}={{ value }}&{% endif %}{% endfor %}" class="ml-1 text-blue-600 hover:text-blue-800">&times;</a>
+                </span>
+            {% endif %}
+            {% for category in categories %}
+                {% if category.id in selected_category_ids %}
+                    <span class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                        {{ category.name }}
+                        <a href="?{% for key, value in request.GET.items %}{% if key != 'category' or value != category.id|stringformat:'s' %}{{ key }}={{ value }}&{% endif %}{% endfor %}" class="ml-1 text-blue-600 hover:text-blue-800">&times;</a>
+                    </span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Products -->
+    <main>
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold">Ürünler</h1>
+            <div class="text-sm text-gray-500">
+                {{ products|length }} ürün bulundu
+            </div>
+        </div>
+        
+        {% if error %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+            <strong class="font-bold">Hata!</strong>
+            <span class="block sm:inline">{{ error }}</span>
+        </div>
+        {% endif %}
+        
+        <!-- Grid view mode switcher -->
+        <div class="flex justify-end items-center mb-6 gap-2">
+          <span class="text-gray-600 text-sm mr-2">Görünüm:</span>
+          <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="4">Küçük</button>
+          <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="3">Orta</button>
+          <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="2">Büyük</button>
+        </div>
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 transition-all duration-300">
+            {% for product in products %}
+            <a href="{% url 'product:product_detail' product.slug %}" class="flex flex-col bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800 dark:border-gray-700 overflow-hidden relative h-full cursor-pointer group">
+                <div class="relative w-full aspect-w-1 aspect-h-1 bg-gray-100">
+                    {% if product.images.first %}
+                        <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"
+                             class="object-cover w-full h-full rounded-t-2xl transition-transform duration-300 hover:scale-105" style="background-color:#fff;" />
+                    {% else %}
+                        <div class="w-full h-full flex items-center justify-center text-gray-400">Görsel Yok</div>
+                    {% endif %}
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="mb-2 text-base sm:text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm line-clamp-2">{{ product.description|truncatewords:15 }}</p>
+                    <span class="text-purple-700 font-bold text-lg sm:text-xl mt-2">
+                        {{ product.price }} 
+                        {% if product.currency == "TRY" %}₺
+                        {% elif product.currency == "USD" %}$
+                        {% elif product.currency == "EUR" %}€
+                        {% else %}{{ product.currency }}
+                        {% endif %}
+                    </span>
+                </div>
+                <button class="mt-auto bg-green-600 text-white py-3 rounded-b-2xl hover:bg-green-700 w-full font-semibold pointer-events-none group-hover:bg-green-700">
+                    Sepete Ekle
+                </button>
+            </a>
+            {% empty %}
+                <div class="col-span-full text-center text-gray-500">Hiç ürün bulunamadı.</div>
+            {% endfor %}
+        </div>
+<script>
+// Product grid view mode switcher
+document.addEventListener('DOMContentLoaded', function() {
+    const grid = document.getElementById('product-grid');
+    const buttons = document.querySelectorAll('.grid-mode-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            buttons.forEach(b => b.classList.remove('bg-purple-200'));
+            btn.classList.add('bg-purple-200');
+            const cols = btn.getAttribute('data-cols');
+            grid.classList.remove('grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+            if (cols == '2') {
+                grid.classList.add('grid-cols-2', 'sm:grid-cols-2');
+            } else if (cols == '3') {
+                grid.classList.add('grid-cols-3', 'md:grid-cols-3');
+            } else if (cols == '4') {
+                grid.classList.add('grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+            }
+        });
+    });
+});
+</script>
+    </main>
+</div>
+</div>
+
+{% endblock page_content %}

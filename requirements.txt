@@ -1,0 +1,9 @@
+Django
+gunicorn
+python-decouple
+psycopg[binary]
+dj-database-url
+Pillow
+whitenoise
+django-cloudinary-storage
+requests

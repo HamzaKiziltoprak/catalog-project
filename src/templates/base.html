@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/3.1.2/flowbite.min.css" integrity="sha512-6W/xuLy0Bz5uiLQ4nakxSHi2J6C3w4Rs7JEuwop9t9+kxAlKYVQNQcNdwwDcU02ogOanRmwT0OqoaJ4LdQOByQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    {% block content %}
+    
+    {% endblock content %}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/3.1.2/flowbite.min.js" integrity="sha512-2BLyJtjYu+hH3j3qJVPeCmJ30uvZqSdSOusGQqCrB6Ylfc71lENbkJt6WWYzPI3PA6eYV5cet5e30EZMIiMiGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html> 

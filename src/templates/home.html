@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="bg-white border-gray-200 dark:bg-gray-900 sticky top-0 z-40 shadow transition-all duration-300">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <span class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-tr from-purple-500 via-pink-400 to-blue-400 shadow-lg">
+      <!-- Renkli çanta (bag) ikonu -->
+      <svg class="w-20 h-20" fill="none" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="deluxeBagBg" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+        <stop offset="0%" stop-color="#060605d7"/>
+        <stop offset="60%" stop-color="#a78bfa"/>
+        <stop offset="100%" stop-color="#6366f1"/>
+        </radialGradient>
+        <linearGradient id="deluxeBagBody" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#f472b6"/>
+        <stop offset="0.5" stop-color="#1c1f2cff"/>
+        <stop offset="1" stop-color="#ea9c16ff"/>
+        </linearGradient>
+        <linearGradient id="deluxeBagHandle" x1="10" y1="8" x2="30" y2="8" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#d69f12ff"/>
+        <stop offset="1" stop-color="#e1881bff"/>
+        </linearGradient>
+      </defs>
+      <!-- Deluxe arka plan -->
+      <ellipse cx="20" cy="20" rx="19" ry="17" fill="url(#deluxeBagBg)" />
+      <!-- Çanta gövdesi -->
+      <rect x="8" y="13" width="24" height="16" rx="4" fill="url(#deluxeBagBody)" stroke="#fff" stroke-width="2" />
+      <!-- Deluxe altın sap -->
+      <path d="M13 13V10a7 7 0 0114 0v3" stroke="url(#deluxeBagHandle)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Deluxe parlama efekti -->
+      <ellipse cx="20" cy="25" rx="8" ry="2.5" fill="#fff" opacity="0.18"/>
+      <circle cx="20" cy="21" r="5" fill="#fff" opacity="0.12"/>
+      <!-- Bag flap highlight -->
+      <path d="M28 18a8 8 0 01-16 0" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Deluxe küçük yıldız -->
+      <circle cx="32" cy="12" r="1.2" fill="#fbbf24" />
+      <circle cx="9" cy="10" r="0.8" fill="#fbbf24" />
+      </svg>
+      </span>
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bag-Store</span>
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
+    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        
+        <li>
+          <a href="/contact" target="_blank" rel="noopener" class="flex items-center gap-2 block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-600 md:p-0 dark:text-white md:dark:hover:text-green-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+            <svg class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.967-.94 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.372.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.288.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12.004 2.003c-5.522 0-9.997 4.475-9.997 9.997 0 1.762.463 3.488 1.345 4.997l-1.427 5.222a1.001 1.001 0 001.217 1.217l5.222-1.427a9.953 9.953 0 004.997 1.345c5.522 0 9.997-4.475 9.997-9.997s-4.475-9.997-9.997-9.997zm0 18.181a8.18 8.18 0 01-4.163-1.146l-.297-.178-3.099.847.83-3.034-.193-.312a8.18 8.18 0 01-1.263-4.358c0-4.514 3.667-8.181 8.181-8.181s8.181 3.667 8.181 8.181-3.667 8.181-8.181 8.181z"/>
+            </svg>
+            Doğrudan iletişime geçin
+          </a>
+        </li>
+        <li>
+            <a href="/" class="flex items-center gap-2 block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+            <svg class="w-5 h-5 text-gray-500 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9.75L12 4l9 5.75M4.5 10.75V19a1 1 0 001 1h3.5a1 1 0 001-1v-4h2v4a1 1 0 001 1h3.5a1 1 0 001-1v-8.25"/>
+            </svg>
+            Anasayfa
+            </a>
+        </li>
+        <li>
+          <a href="{% url 'product:product_list' %}" class="flex items-center gap-2 block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+            <svg class="w-5 h-5 text-gray-500 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18"/>
+            </svg>
+            Ürünler
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'orders:cart_detail' %}" class="flex items-center gap-2 block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+            <svg class="w-5 h-5 text-gray-500 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007.6 17h8.8a1 1 0 00.95-1.3L17 13M7 13V6h13"></path>
+            </svg>
+            Alışveriş Sepeti
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% block page_content %}
+<!-- Hero Section (scroll reveal) -->
+<div id="hero-section" class="relative bg-gradient-to-r from-purple-600 via-blue-600 to-purple-800 text-white py-20 md:py-28 overflow-hidden opacity-0 translate-y-10 transition-all duration-1000">
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-3xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Stilinizi Tamamlayacak Çantalar</h1>
+      <p class="text-xl md:text-2xl mb-8">Tarzınızı ürünlerimizle ifade edin. Günlük kullanımdan özel etkinliklere kadar her ihtiyaca uygun tasarımlar.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/products" class="bg-white text-purple-700 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition duration-300 shadow-lg">Hemen Keşfet</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+            <div class="p-6">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Premium Kalite</h3>
+                <p class="text-gray-600">En kaliteli malzemelerle üretilmiş, uzun ömürlü çantalar</p>
+            </div>
+            <div class="p-6">
+              <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <!-- Geniş Ürün Yelpazesi ikonu: grid -->
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="7" height="7" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="14" y="3" width="7" height="7" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="14" y="14" width="7" height="7" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="3" y="14" width="7" height="7" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Geniş Ürün Yelpazesi</h3>
+              <p class="text-gray-600">Her tarza ve ihtiyaca uygun geniş çanta koleksiyonu</p>
+            </div>
+            <div class="p-6">
+              <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <!-- Uygun Fiyatlı ikonu: para/etiket -->
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 8v8M9 12h6"/>
+              </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Uygun Fiyatlı</h3>
+              <p class="text-gray-600">Kaliteden ödün vermeden bütçenize uygun seçenekler</p>
+            </div>
+            <div class="p-6">
+              <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <!-- Kargo Dahil ikonu: paket/kargo -->
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="7" width="18" height="13" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3 7l9 5 9-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 12v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">Kargo Dahil</h3>
+              <p class="text-gray-600">Kargo ücreti fiyata dahildir</p>
+            </div>
+    </div>
+</div>
+
+<!-- Products Preview Section -->
+<div class="py-16 bg-gray-50">
+  <div class="container mx-auto px-2 sm:px-4">
+    <h2 class="text-3xl font-bold text-center mb-10 text-purple-700">Popüler Ürünler</h2>
+    <!-- Grid view mode switcher -->
+    <div class="flex justify-end items-center mb-6 gap-2">
+      <span class="text-gray-600 text-sm mr-2">Görünüm:</span>
+      <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="4">Küçük</button>
+      <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="3">Orta</button>
+      <button type="button" class="grid-mode-btn px-3 py-1 rounded-full border border-purple-300 bg-white text-purple-700 text-xs font-semibold hover:bg-purple-100 focus:bg-purple-200 transition" data-cols="2">Büyük</button>
+    </div>
+  <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 transition-all duration-300">
+      {% for product in popular_products %}
+      <div class="flex flex-col bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800 dark:border-gray-700 overflow-hidden relative h-full">
+        <a href="{% url 'product:product_detail' product.slug %}" class="flex flex-col h-full">
+          <div class="relative w-full aspect-w-1 aspect-h-1 bg-gray-100">
+            {% if product.images.first %}
+              <img src="{{ product.images.first.image.url }}" alt="{{ product.name }}"
+                   class="object-cover w-full h-full rounded-t-2xl transition-transform duration-300 hover:scale-105" style="background-color:#fff;" />
+            {% else %}
+              <div class="w-full h-full flex items-center justify-center text-gray-400">Görsel Yok</div>
+            {% endif %}
+            <div class="absolute top-2 right-2 bg-purple-700 text-white text-xs px-3 py-1 rounded-full shadow-lg font-semibold">Popüler</div>
+          </div>
+          <div class="p-4 flex flex-col flex-1">
+            <h3 class="mb-2 text-base sm:text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{{ product.name }}</h3>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-purple-700 font-bold text-lg sm:text-xl">
+                {{ product.price }} 
+                {% if product.currency == "TRY" %}₺
+                {% elif product.currency == "USD" %}$
+                {% elif product.currency == "EUR" %}€
+                {% else %}{{ product.currency }}
+                {% endif %}
+              </span>
+            </div>
+            {% if product.description %}
+              <p class="text-gray-600 text-xs sm:text-sm line-clamp-2">{{ product.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+      </div>
+      {% empty %}
+      <div class="col-span-full text-center text-gray-500">Henüz ürün eklenmedi.</div>
+      {% endfor %}
+    </div>
+    <div class="mt-8 text-center flex flex-col sm:flex-row justify-center gap-4">
+      <a href="{% url 'product:product_list' %}" class="inline-block bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition">Tüm Ürünleri Gör</a>
+      <a href="/contact" class="inline-block bg-purple-700 text-white px-6 py-3 rounded-full font-semibold hover:bg-purple-800 transition">İletişime Geçin</a>
+    </div>
+  </div>
+</div>
+<script>
+// Hero section scroll reveal
+document.addEventListener('DOMContentLoaded', function() {
+  function revealHero() {
+    var hero = document.getElementById('hero-section');
+    if (!hero) return;
+    var rect = hero.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      hero.classList.add('opacity-100');
+      hero.classList.remove('opacity-0');
+      hero.classList.remove('translate-y-10');
+    }
+  }
+  window.addEventListener('scroll', revealHero);
+  revealHero();
+
+  // Product grid view mode switcher
+  const grid = document.getElementById('product-grid');
+  const buttons = document.querySelectorAll('.grid-mode-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      buttons.forEach(b => b.classList.remove('bg-purple-200'));
+      btn.classList.add('bg-purple-200');
+      const cols = btn.getAttribute('data-cols');
+      grid.classList.remove('grid-cols-1', 'grid-cols-2', 'grid-cols-3', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+      if (cols == '2') {
+        grid.classList.add('grid-cols-2', 'sm:grid-cols-2');
+      } else if (cols == '3') {
+        grid.classList.add('grid-cols-3', 'md:grid-cols-3');
+      } else if (cols == '4') {
+        grid.classList.add('grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4');
+      }
+    });
+  });
+});
+</script>
+{% endblock page_content %}
+{% endblock content %}
